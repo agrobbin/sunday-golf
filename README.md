@@ -1,7 +1,6 @@
 # sunday-golf
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Stores and calculates scores for our Sunday golf game.
 
 ## Prerequisites
 
@@ -15,7 +14,7 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+* `git clone git@github.com:agrobbin/sunday-golf.git` this repository
 * `cd sunday-golf`
 * `yarn install`
 
@@ -46,7 +45,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+Use [Heroku](https://devcenter.heroku.com/articles/git).
 
 ## Further Reading / Useful Links
 
