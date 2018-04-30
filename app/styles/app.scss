@@ -1,0 +1,30 @@
+// variables
+$font-family: Times New Roman;
+$beige-color: #f6ecd9;
+$blue-color: #013d7d;
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+body {
+  background-color: #fff;
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+  color: $blue-color;
+}
+
+section#content {
+  padding: 20px;
+}
+
+@import "header";
