@@ -15,6 +15,14 @@ $blue-color: #013d7d;
   }
 }
 
+input {
+  color: $blue-color;
+  font: {
+    family: $font-family;
+    size: 16px;
+  }
+}
+
 button {
   font-family: $font-family;
 

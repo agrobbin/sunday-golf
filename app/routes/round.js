@@ -13,5 +13,11 @@ export default Route.extend({
     if (isBlank(model)) {
       return this.transitionTo('rounds');
     }
+  },
+
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      controller.resetNewPlayer();
+    }
   }
 });

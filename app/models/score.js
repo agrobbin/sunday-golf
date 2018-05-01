@@ -2,10 +2,10 @@ import DS from 'ember-data';
 import { isBlank } from '@ember/utils';
 
 export default DS.Model.extend({
-  players: DS.hasMany(),
+  player: DS.belongsTo(),
 
-  createdAt: DS.attr('date'),
-  updatedAt: DS.attr('date'),
+  hole: DS.attr(),
+  gross: DS.attr('number'),
 
   init() {
     this._super(...arguments);

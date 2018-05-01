@@ -1,4 +1,7 @@
 import Controller from '@ember/controller';
+import { isBlank } from '@ember/utils';
+import { computed } from '@ember/object';
+import { all } from 'rsvp';
 
 export default Controller.extend({
   // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
@@ -24,5 +27,37 @@ export default Controller.extend({
       { number: 17, par: 4, handicap: 6 },
       { number: 18, par: 5, handicap: 4 }
     ]
+  },
+
+  newPlayerName: null,
+  newPlayerHandicap: null,
+  newPlayerBid: null,
+
+  isNewPlayerInvalid: computed('newPlayerName', 'newPlayerHandicap', 'newPlayerBid', function() {
+    return ['newPlayerName', 'newPlayerHandicap', 'newPlayerBid'].any((attr) => isBlank(this.get(attr)));
+  }),
+
+  resetNewPlayer() {
+    this.setProperties({ newPlayerName: null, newPlayerHandicap: null, newPlayerBid: null });
+  },
+
+  actions: {
+    addNewPlayer() {
+      const player = this.get('store').createRecord('player', {
+        round: this.get('model'),
+        name: this.get('newPlayerName'),
+        handicap: this.get('newPlayerHandicap'),
+        bid: this.get('newPlayerBid')
+      });
+
+      player.save().then(() => {
+        // TODO: would be nice to do this atomically as part of `createRecord('player')` above
+        const scores = this.get('course.holes').map((hole) => this.get('store').createRecord('score', { player: player, hole: hole }));
+
+        all(scores.map((score) => score.save())).then(() => {
+          this.resetNewPlayer();
+        });
+      });
+    }
   }
 });
