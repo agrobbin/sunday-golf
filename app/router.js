@@ -8,6 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('rounds');
+  this.route('round', { path: '/rounds/:id' });
 });
 
 export default Router;

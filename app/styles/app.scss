@@ -15,6 +15,14 @@ $blue-color: #013d7d;
   }
 }
 
+button {
+  font-family: $font-family;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 body {
   background-color: #fff;
   font-family: $font-family;
@@ -28,3 +36,4 @@ section#content {
 }
 
 @import "header";
+@import "templates/round";

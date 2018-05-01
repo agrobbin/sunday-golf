@@ -1,0 +1,50 @@
+$border-color: lighten(#231f20, 50%);
+
+.scorecard-scroller {
+  margin: 10px auto;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+table.scorecard {
+  background-color: #fffef2;
+  border: 1px solid $border-color {
+    spacing: 0;
+    radius: 25px;
+  }
+  box-shadow: 0 0 0 10px #fffef2;
+  margin: 10px auto;
+  padding-bottom: 25px;
+  width: 1200px;
+
+  > tr {
+    > td, > th {
+      border: {
+        color: $border-color;
+        style: solid;
+        width: 0 0 1px 1px;
+      }
+      padding: 10px;
+      text-align: center;
+
+      &:first-child {
+        border-left-width: 0;
+        text-align: left;
+        width: 100px;
+        white-space: nowrap;
+        padding-left: 15px;
+      }
+    }
+
+    &.scorecard-heading {
+      > th {
+        padding: 10px;
+        text-align: center;
+      }
+    }
+
+    &.scorecard-holes {
+      font-weight: bold;
+    }
+  }
+}

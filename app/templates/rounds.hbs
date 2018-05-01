@@ -2,7 +2,7 @@
   <ul>
     {{#each (sort-by 'createdAt:desc' model) as |round|}}
       <li>
-        {{moment-format round.createdAt 'MMMM Do, YYYY'}}
+        {{link-to (moment-format round.createdAt 'MMMM Do, YYYY') 'round' round.id}}
       </li>
     {{/each}}
   </ul>
