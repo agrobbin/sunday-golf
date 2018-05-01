@@ -3,6 +3,12 @@
 {{#each (sort-by "hole.number" player.scores) as |score|}}
   <td class="player-scorecard-score">
     <input type="number" min="0" tabindex={{score.hole.number}} value={{unbound score.gross}} oninput={{action (action "save" score) value="target.value"}} onfocus={{action 'selectAll' value="target"}}>
+
+    <div class="shots">
+      {{#each (repeat score.shots) as |empty|}}
+        <div class="shots-shot"></div>
+      {{/each}}
+    </div>
   </td>
 {{/each}}
 

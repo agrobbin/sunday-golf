@@ -60,6 +60,35 @@ module('Acceptance | round', function(hooks) {
     assert.equal($('tr.player-scorecard:eq(1) td:eq(0)').text().trim(), 'Adam (CH: 1, Bid: 0)');
   });
 
+  test('seeing the shots of a player', async function(assert) {
+    await visit('/rounds');
+
+    assert.equal(find('nav button').textContent.trim(), 'New round');
+
+    await click('nav button');
+
+    await addPlayer({ name: 'Alex', handicap: 20, bid: 19 }, assert);
+
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(0) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(1) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(2) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(3) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(4) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(5) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(6) .shots .shots-shot').length, 2); // 7th hole, #1 handicap hole
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(7) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(8) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(9) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(10) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(11) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(12) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(13) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(14) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(15) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(16) .shots .shots-shot').length, 1);
+    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(17) .shots .shots-shot').length, 1);
+  });
+
   test('inputting player scores', async function(assert) {
     await visit('/rounds');
 

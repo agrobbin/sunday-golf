@@ -73,6 +73,24 @@ table.scorecard {
           outline: 0;
         }
       }
+
+      .shots {
+        bottom: 0;
+        box-sizing: border-box;
+        left: 0;
+        padding: 0 5px;
+        position: absolute;
+        text-align: right;
+        width: 100%;
+
+        .shots-shot {
+          background-color: $blue-color;
+          border-radius: 4px;
+          display: inline-block;
+          height: 4px;
+          width: 4px;
+        }
+      }
     }
   }
 }
