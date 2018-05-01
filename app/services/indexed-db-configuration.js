@@ -7,11 +7,18 @@ export default IndexedDbConfigurationService.extend({
   // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
   version1: {
     stores: {
+      'round': '&id'
     }
   },
 
   mapTable: computed(function() {
     return {
+      round: (round) => {
+        return {
+          id: this._toString(round.id),
+          json: this._cleanObject(round)
+        };
+      }
     };
   })
 });
