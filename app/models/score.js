@@ -24,5 +24,23 @@ export default DS.Model.extend({
     }
 
     return shots;
+  }),
+
+  net: computed('gross', 'shots', function() {
+    if (isBlank(this.get('gross'))) { return; }
+
+    return this.get('gross') - this.get('shots');
+  }),
+
+  grossToPar: computed('gross', 'hole.par', function() {
+    if (isBlank(this.get('gross'))) { return; }
+
+    return this.get('gross') - this.get('hole.par');
+  }),
+
+  netToPar: computed('net', 'hole.par', function() {
+    if (isBlank(this.get('net'))) { return; }
+
+    return this.get('net') - this.get('hole.par');
   })
 });

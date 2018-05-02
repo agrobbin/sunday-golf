@@ -89,7 +89,7 @@ module('Acceptance | round', function(hooks) {
     assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(17) .shots .shots-shot').length, 1);
   });
 
-  test('inputting player scores', async function(assert) {
+  test('inputting player scores and calculating totals', async function(assert) {
     await visit('/rounds');
 
     assert.equal(find('nav button').textContent.trim(), 'New round');
@@ -98,13 +98,38 @@ module('Acceptance | round', function(hooks) {
 
     await addPlayer({ name: 'Alex', handicap: 10, bid: 8 }, assert);
     await addPlayer({ name: 'Adam', handicap: 1, bid: 0 }, assert);
+    await addPlayer({ name: 'Aaron', handicap: 21, bid: 21 }, assert);
 
+    // hole 1
     await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(0) input').get(0), '4');
-    await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(1) input').get(0), '5');
-    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(0) input').get(0), '3');
-    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(1) input').get(0), '4');
+    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(0) input').get(0), '4');
+    await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(0) input').get(0), '4');
 
-    assert.equal($('tr.player-scorecard:eq(0) td').get(19).textContent.trim(), '9');
-    assert.equal($('tr.player-scorecard:eq(1) td').get(19).textContent.trim(), '7');
+    // hole 2
+    await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(1) input').get(0), '5');
+    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(1) input').get(0), '5');
+    await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(1) input').get(0), '5');
+
+    // hole 3
+    await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(2) input').get(0), '4');
+    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(2) input').get(0), '3');
+    await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(2) input').get(0), '4');
+
+    // hole 4
+    await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(3) input').get(0), '3');
+    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(3) input').get(0), '3');
+    await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(3) input').get(0), '3');
+
+    // player totals
+    assert.equal($('tr.player-scorecard:eq(0) td').get(19).textContent.trim(), '16');
+    assert.equal($('tr.player-scorecard:eq(0) td').get(20).textContent.trim(), '15');
+    assert.equal($('tr.player-scorecard:eq(1) td').get(19).textContent.trim(), '15');
+    assert.equal($('tr.player-scorecard:eq(1) td').get(20).textContent.trim(), '15');
+    assert.equal($('tr.player-scorecard:eq(2) td').get(19).textContent.trim(), '16');
+    assert.equal($('tr.player-scorecard:eq(2) td').get(20).textContent.trim(), '11');
+
+    // team nets
+    assert.deepEqual($('table.scorecard tr:eq(9) td').map(function () { return $(this).text().trim() }).get(), ['Team net per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+    assert.deepEqual($('table.scorecard tr:eq(10) td').map(function () { return $(this).text().trim() }).get(), ['Team net running total', '−1', '−4', '−3', '−7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
   });
 });
