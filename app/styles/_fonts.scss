@@ -1,0 +1,15 @@
+@mixin font-face($font-family, $file-path, $font-weight: normal, $font-style: normal) {
+  @font-face {
+    src: url("/assets/fonts/#{$file-path}.ttf") format("truetype");
+    font: {
+      family: $font-family;
+      weight: $font-weight;
+      style: $font-style;
+    }
+  }
+}
+
+@include font-face("Open Sans", "OpenSans-Light", $font-weight: normal, $font-style: normal);
+@include font-face("Open Sans", "OpenSans-LightItalic", $font-weight: normal, $font-style: italic);
+@include font-face("Open Sans", "OpenSans-SemiBold", $font-weight: bold, $font-style: normal);
+@include font-face("Open Sans", "OpenSans-SemiBoldItalic", $font-weight: bold, $font-style: italic);
