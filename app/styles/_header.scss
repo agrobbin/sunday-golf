@@ -1,22 +1,24 @@
 header {
   align-items: center;
-  background-color: $beige-color;
+  background: linear-gradient($blue-color, darken($blue-color, 10%));
   border-bottom: 1px solid $blue-color;
   box-shadow: 0 0 10px 1px transparentize($blue-color, 0.5);
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 5px 0;
   position: sticky;
   top: 0;
+  z-index: 1;
 
   img#logo {
-    height: 70px;
+    height: 50px;
     margin: 0 30px;
   }
 
   h1 {
+    color: #efefef;
     display: inline;
-    font-size: 28px;
+    font-size: 26px;
   }
 
   input#nav-toggle {
@@ -29,7 +31,6 @@ header {
     }
 
     > button {
-      border: 0;
       text-align: left;
     }
   }
@@ -43,17 +44,8 @@ header {
       margin-right: 30px;
       padding: 0;
 
-      > a, > button {
-        background-color: darken($beige-color, 5%);
-        border-radius: 5px;
-        color: $blue-color;
-        font-size: 18px;
+      > a.button, > button {
         margin-left: 15px;
-        padding: 10px 17px;
-
-        &:hover, &.active {
-          background-color: darken($beige-color, 10%);
-        }
 
         &:first-child {
           margin-left: 0;
@@ -63,10 +55,10 @@ header {
   }
 
   @include mobile {
-    padding: 10px 0;
+    padding: 5px 0;
 
     img#logo {
-      height: 50px;
+      height: 40px;
       margin: 0 10px;
     }
 
@@ -100,11 +92,12 @@ header {
     }
 
     label#nav-hamburger {
-      width: 40px;
+      cursor: pointer;
       margin-right: 10px;
+      width: 40px;
 
       span {
-        background-color: $blue-color;
+        background-color: #efefef;
         border-radius: 3px;
         display: block;
         height: 4px;
@@ -114,26 +107,19 @@ header {
     }
 
     nav {
-      top: 71px;
       opacity: 0;
       position: absolute;
+      top: 65px;
       transition: 0.3s;
       visibility: hidden;
       width: 100%;
 
-      > a, > button {
-        background-color: darken($beige-color, 5%);
-        border-bottom: 1px solid $blue-color;
-        box-sizing: border-box;
-        color: $blue-color;
+      > a.button, > button {
+        border-bottom: 1px solid #ccc;
+        border-radius: 0;
         display: block;
         font-size: 18px;
-        padding: 10px 17px;
         width: 100%;
-
-        &:hover, &.active {
-          background-color: darken($beige-color, 10%);
-        }
       }
     }
   }

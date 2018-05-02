@@ -2,7 +2,6 @@
 
 // variables
 $font-family: "Open Sans", sans-serif;
-$beige-color: #f6ecd9;
 $blue-color: #013d7d;
 
 @mixin mobile {
@@ -17,6 +16,10 @@ $blue-color: #013d7d;
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 input {
   color: $blue-color;
   font: {
@@ -25,11 +28,27 @@ input {
   }
 }
 
-button {
-  font-family: $font-family;
+button, input[type="submit"], a.button {
+  background-color: #efefef;
+  border: 0 {
+    radius: 5px;
+  }
+  color: $blue-color;
+  font: {
+    family: $font-family;
+    size: 16px;
+  }
+  outline: 0;
+  padding: 10px 17px;
+  transition: 0.2s;
 
-  &:hover {
+  &:hover, &:focus, &.active {
+    background-color: #dfdfdf;
     cursor: pointer;
+  }
+
+  &:active {
+    background-color: #ccc;
   }
 }
 
@@ -42,7 +61,7 @@ body {
 }
 
 section#content {
-  padding: 20px;
+  padding: 10px;
 }
 
 @import "header";
