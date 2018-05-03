@@ -1,11 +1,11 @@
-{{#if model}}
-  <ul>
+<div class="rounds-list">
+  {{#if model}}
     {{#each (sort-by 'createdAt:desc' model) as |round|}}
-      <li>
-        {{link-to (moment-format round.createdAt 'MMMM Do, YYYY') 'round' round.id}}
-      </li>
+      <div class="rounds-list-item">
+        {{link-to (moment-format round.createdAt 'MMMM Do, YYYY hh:mma') 'round' round.id}}
+      </div>
     {{/each}}
-  </ul>
-{{else}}
-  <p>You have no rounds.</p>
-{{/if}}
+  {{else}}
+    <p>You have no saved rounds.</p>
+  {{/if}}
+</div>

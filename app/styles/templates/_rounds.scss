@@ -1,0 +1,25 @@
+.rounds-list {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  > * {
+    flex: 0 0 25%;
+    padding: 5px;
+    text-align: center;
+
+    @include mobile {
+      flex-basis: 50%;
+    }
+  }
+
+  .rounds-list-item {
+    > a {
+      @extend .button;
+
+      display: block;
+      text-decoration: none;
+    }
+  }
+}

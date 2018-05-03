@@ -8,7 +8,7 @@ module('Acceptance | rounds', function(hooks) {
   test('there are no rounds', async function(assert) {
     await visit('/rounds');
 
-    assert.equal(find('section#content').textContent.trim(), 'You have no rounds.');
+    assert.equal(find('.rounds-list').textContent.trim(), 'You have no saved rounds.');
   });
 
   test('the rounds are listed in reverse-chronological order', async function(assert) {
@@ -20,6 +20,6 @@ module('Acceptance | rounds', function(hooks) {
 
     await visit('/rounds');
 
-    assert.deepEqual(findAll('section#content ul li').map((item) => item.textContent.trim()), ['June 9th, 2018', 'June 8th, 2018']);
+    assert.deepEqual(findAll('.rounds-list-item').map((item) => item.textContent.trim()), ['June 9th, 2018 09:49pm', 'June 8th, 2018 09:49pm']);
   });
 });
