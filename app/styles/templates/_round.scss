@@ -13,7 +13,7 @@ table.scorecard {
   box-shadow: 0 0 20px 0px #ccc;
   margin: 10px auto;
   padding-bottom: 25px;
-  width: 1200px;
+  width: 1289px;
 
   > tr {
     > td, > th {
@@ -24,6 +24,7 @@ table.scorecard {
       }
       padding: 10px;
       text-align: center;
+      width: 53px;
 
       &:first-child {
         border-left-width: 0;
@@ -31,6 +32,10 @@ table.scorecard {
         width: 100px;
         white-space: nowrap;
         padding-left: 15px;
+      }
+
+      &:last-child, &:nth-last-child(2) {
+        width: 65px;
       }
     }
 
