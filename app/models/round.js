@@ -5,7 +5,7 @@ import { computed } from '@ember/object';
 import hasManyThrough from 'ember-data-has-many-through/macros/has-many-through';
 
 export default DS.Model.extend({
-  players: DS.hasMany(),
+  players: DS.hasMany({ dependent: 'destroy' }),
 
   scores: hasManyThrough('players'),
 

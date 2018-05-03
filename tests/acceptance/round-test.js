@@ -41,7 +41,7 @@ module('Acceptance | round', function(hooks) {
 
     const createdAt = round.json.attributes['created-at'];
 
-    assert.equal(findAll('table.scorecard tr.scorecard-heading')[0].textContent.trim(), `TPC Boston - ${moment(createdAt).format('MMMM Do, YYYY')}`);
+    assert.equal(findAll('table.scorecard tr.scorecard-heading')[0].textContent.trim(), `Delete\n        \n\n        TPC Boston - ${moment(createdAt).format('MMMM Do, YYYY')}`);
   });
 
   test('adding players to a round', async function(assert) {
@@ -131,5 +131,28 @@ module('Acceptance | round', function(hooks) {
     // team nets
     assert.deepEqual($('table.scorecard tr:eq(9) td').map(function () { return $(this).text().trim() }).get(), ['Team net per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
     assert.deepEqual($('table.scorecard tr:eq(10) td').map(function () { return $(this).text().trim() }).get(), ['Team net running total', '−1', '−4', '−3', '−7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+  });
+
+  test('deleting a round', async function(assert) {
+    await visit('/rounds');
+
+    assert.equal(find('nav button').textContent.trim(), 'New round');
+
+    await click('nav button');
+
+    // add dependent data
+    await addPlayer({ name: 'Alex', handicap: 10, bid: 8 }, assert);
+
+    await click('button.scorecoard-remove-round');
+
+    const indexedDb = this.owner.lookup('service:indexed-db');
+    const rounds = await indexedDb.findAll('round');
+    const players = await indexedDb.findAll('player');
+    const scores = await indexedDb.findAll('score');
+
+    assert.equal(currentURL(), '/rounds');
+    assert.equal(rounds.length, 0);
+    assert.equal(players.length, 0);
+    assert.equal(scores.length, 0);
   });
 });

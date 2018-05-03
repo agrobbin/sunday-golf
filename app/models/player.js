@@ -5,7 +5,7 @@ import { isBlank } from '@ember/utils';
 export default DS.Model.extend({
   round: DS.belongsTo(),
 
-  scores: DS.hasMany(),
+  scores: DS.hasMany({ dependent: 'destroy' }),
 
   name: DS.attr(),
   handicap: DS.attr('number'),

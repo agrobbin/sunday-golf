@@ -58,6 +58,12 @@ export default Controller.extend({
           this.resetNewPlayer();
         });
       });
+    },
+
+    delete() {
+      this.get('model').destroyRecord().then(() => {
+        this.transitionToRoute('rounds');
+      });
     }
   }
 });
