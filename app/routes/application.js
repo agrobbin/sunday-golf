@@ -8,5 +8,11 @@ export default Route.extend({
     this._super(...arguments);
 
     return this.get('indexedDb').setup();
+  },
+
+  actions: {
+    didTransition() {
+      this.controller.set('mobileNavIsOpen', false);
+    }
   }
 });
