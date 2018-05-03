@@ -6,7 +6,9 @@ export default Component.extend({
 
   actions: {
     save(score, gross) {
-      score.set('gross', parseInt(gross));
+      const value = parseInt(gross);
+
+      score.set('gross', isNaN(value) ? null : value);
 
       score.save();
     },
