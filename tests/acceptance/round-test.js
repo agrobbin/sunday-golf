@@ -52,9 +52,12 @@ module('Acceptance | round', function(hooks) {
     await click('nav button');
 
     await addPlayer({ name: 'Alex', handicap: 10, bid: 8 }, assert);
+
+    assert.equal(findAll('table.scorecard tr.scorecard-heading')[1].textContent.trim(), 'Team (1 player)');
+
     await addPlayer({ name: 'Adam', handicap: 1, bid: 0 }, assert);
 
-    assert.equal(findAll('table.scorecard tr.scorecard-heading')[1].textContent.trim(), 'Players (2)');
+    assert.equal(findAll('table.scorecard tr.scorecard-heading')[1].textContent.trim(), 'Team (2 players)');
     assert.equal(findAll('tr.player-scorecard').length, 2);
     assert.equal($('tr.player-scorecard:eq(0) td:eq(0)').text().trim(), 'Alex (CH: 10, Bid: 8)');
     assert.equal($('tr.player-scorecard:eq(1) td:eq(0)').text().trim(), 'Adam (CH: 1, Bid: 0)');
