@@ -103,6 +103,13 @@ module('Acceptance | round', function(hooks) {
     await addPlayer({ name: 'Adam', handicap: 1, bid: 0 }, assert);
     await addPlayer({ name: 'Aaron', handicap: 21, bid: 21 }, assert);
 
+    assert.equal($('tr.player-scorecard:eq(0) td').get(19).textContent.trim(), '');
+    assert.equal($('tr.player-scorecard:eq(0) td').get(20).textContent.trim(), '');
+    assert.equal($('tr.player-scorecard:eq(1) td').get(19).textContent.trim(), '');
+    assert.equal($('tr.player-scorecard:eq(1) td').get(20).textContent.trim(), '');
+    assert.equal($('tr.player-scorecard:eq(2) td').get(19).textContent.trim(), '');
+    assert.equal($('tr.player-scorecard:eq(2) td').get(20).textContent.trim(), '');
+
     // hole 1
     await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(0) input').get(0), '4');
     await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(0) input').get(0), '4');

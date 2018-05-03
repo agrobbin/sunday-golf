@@ -20,10 +20,18 @@ export default DS.Model.extend({
   },
 
   totalGross: computed('scores.@each.gross', function() {
-    return this.get('scores').mapBy('gross').compact().reduce((a, b) => a + b, 0);
+    const scores = this.get('scores').mapBy('gross').compact();
+
+    if (scores.get('length') > 0) {
+      return scores.reduce((a, b) => a + b, 0);
+    }
   }),
 
   totalNet: computed('scores.@each.net', function() {
-    return this.get('scores').mapBy('net').compact().reduce((a, b) => a + b, 0);
+    const scores = this.get('scores').mapBy('net').compact();
+
+    if (scores.get('length') > 0) {
+      return scores.reduce((a, b) => a + b, 0);
+    }
   })
 });
