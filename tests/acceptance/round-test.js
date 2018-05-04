@@ -41,7 +41,7 @@ module('Acceptance | round', function(hooks) {
 
     const createdAt = round.json.attributes['created-at'];
 
-    assert.equal(findAll('table.scorecard tr.scorecard-heading')[0].textContent.trim(), `Delete\n        \n\n        TPC Boston - ${moment(createdAt).format('MMMM Do, YYYY')}`);
+    assert.equal(findAll('div.scorecard-heading')[0].textContent.trim(), `Delete\n    \n\n    ${moment(createdAt).format('MMMM Do, YYYY')}`);
   });
 
   test('adding players to a round', async function(assert) {
@@ -53,11 +53,11 @@ module('Acceptance | round', function(hooks) {
 
     await addPlayer({ name: 'Alex', handicap: 10, bid: 8 }, assert);
 
-    assert.equal(findAll('table.scorecard tr.scorecard-heading')[1].textContent.trim(), 'Team (1 player)');
+    assert.equal(findAll('table tr.scorecard-heading')[0].textContent.trim(), 'Team (1 player)');
 
     await addPlayer({ name: 'Adam', handicap: 1, bid: 0 }, assert);
 
-    assert.equal(findAll('table.scorecard tr.scorecard-heading')[1].textContent.trim(), 'Team (2 players)');
+    assert.equal(findAll('table tr.scorecard-heading')[0].textContent.trim(), 'Team (2 players)');
     assert.equal(findAll('tr.player-scorecard').length, 2);
     assert.equal($('tr.player-scorecard:eq(0) td:eq(0)').text().trim(), 'Alex (CH: 10, Bid: 8)');
     assert.equal($('tr.player-scorecard:eq(1) td:eq(0)').text().trim(), 'Adam (CH: 1, Bid: 0)');
@@ -139,8 +139,8 @@ module('Acceptance | round', function(hooks) {
     assert.equal($('tr.player-scorecard:eq(2) td').get(20).textContent.trim(), '11');
 
     // team nets
-    assert.deepEqual($('table.scorecard tr:eq(9) td').map(function () { return $(this).text().trim() }).get(), ['Team net per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
-    assert.deepEqual($('table.scorecard tr:eq(10) td').map(function () { return $(this).text().trim() }).get(), ['Team net running total', '−1', '−4', '−3', '−7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+    assert.deepEqual($('table tr:eq(8) td').map(function () { return $(this).text().trim() }).get(), ['Team net per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+    assert.deepEqual($('table tr:eq(9) td').map(function () { return $(this).text().trim() }).get(), ['Team net running total', '−1', '−4', '−3', '−7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
   });
 
   test('deleting a round', async function(assert) {

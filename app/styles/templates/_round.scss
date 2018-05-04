@@ -1,11 +1,6 @@
-.scorecard-scroller {
-  margin: 10px auto;
-  width: 100%;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-}
+$scorecard-width: 1289px;
 
-table.scorecard {
+.scorecard {
   border: 1px solid #ccc {
     radius: 4px;
     spacing: 0;
@@ -13,91 +8,114 @@ table.scorecard {
   box-shadow: 0 0 20px 0px #ccc;
   margin: 10px auto;
   padding-bottom: 25px;
-  width: 1289px;
+  width: $scorecard-width + 2px;
 
-  > tr {
-    > td, > th {
-      border: {
-        color: #ccc;
-        style: solid;
-        width: 0 0 1px 1px;
-      }
-      padding: 10px;
-      text-align: center;
-      width: 53px;
+  @include mobile {
+    width: auto;
+  }
 
-      &:first-child {
-        border-left-width: 0;
-        text-align: left;
-        width: 100px;
-        white-space: nowrap;
-        padding-left: 15px;
-      }
+  .scorecard-heading {
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    padding: 10px;
+    position: relative;
+    text-align: center;
 
-      &:last-child, &:nth-last-child(2) {
-        width: 65px;
-      }
+    button.scorecoard-remove-round {
+      position: absolute;
+      padding: 5px 10px;
+      right: 5px;
+      top: 5px;
     }
+  }
 
-    &.scorecard-heading {
-      > th {
+  .scorecard-scroller {
+    width: 100%;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    border-spacing: 0;
+    width: $scorecard-width;
+
+    > tr {
+      > td, > th {
+        border: {
+          color: #ccc;
+          style: solid;
+          width: 0 0 1px 1px;
+        }
         padding: 10px;
         text-align: center;
+        width: 53px;
+
+        &:first-child {
+          border-left-width: 0;
+          text-align: left;
+          width: 100px;
+          white-space: nowrap;
+          padding-left: 15px;
+        }
+
+        &:last-child, &:nth-last-child(2) {
+          width: 65px;
+        }
+      }
+
+      &.scorecard-heading {
+        > th {
+          padding: 10px;
+          text-align: center;
+          position: relative;
+        }
+      }
+
+      &.scorecard-holes {
+        font-weight: bold;
+      }
+
+      &.scorecard-no-players {
+        > td {
+          color: #aaa;
+          font-style: italic;
+          padding: 30px 0;
+          text-align: center;
+        }
+      }
+
+      > td.player-scorecard-score {
+        padding: 0;
         position: relative;
 
-        button.scorecoard-remove-round {
+        > input {
+          background: transparent;
+          border: 0;
+          padding: 15px 5px 15px 15px;
+          text-align: center;
+          width: 100%;
+
+          &:focus {
+            background-color: #eee;
+            outline: 0;
+          }
+        }
+
+        .shots {
+          bottom: 0;
+          left: 0;
+          padding: 0 5px;
           position: absolute;
-          padding: 5px 10px;
-          right: 5px;
-          top: 5px;
-        }
-      }
-    }
+          text-align: right;
+          width: 100%;
 
-    &.scorecard-holes {
-      font-weight: bold;
-    }
-
-    &.scorecard-no-players {
-      > td {
-        color: #aaa;
-        font-style: italic;
-        padding: 30px 0;
-        text-align: center;
-      }
-    }
-
-    > td.player-scorecard-score {
-      padding: 0;
-      position: relative;
-
-      > input {
-        background: transparent;
-        border: 0;
-        padding: 15px 5px 15px 15px;
-        text-align: center;
-        width: 100%;
-
-        &:focus {
-          background-color: #eee;
-          outline: 0;
-        }
-      }
-
-      .shots {
-        bottom: 0;
-        left: 0;
-        padding: 0 5px;
-        position: absolute;
-        text-align: right;
-        width: 100%;
-
-        .shots-shot {
-          background-color: $blue-color;
-          border-radius: 4px;
-          display: inline-block;
-          height: 4px;
-          width: 4px;
+          .shots-shot {
+            background-color: $blue-color;
+            border-radius: 4px;
+            display: inline-block;
+            height: 4px;
+            width: 4px;
+          }
         }
       }
     }
