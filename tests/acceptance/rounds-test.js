@@ -20,6 +20,6 @@ module('Acceptance | rounds', function(hooks) {
 
     await visit('/rounds');
 
-    assert.deepEqual(findAll('.rounds-list-item').map((item) => item.textContent.trim()), ['June 9th, 2018 09:49pm', 'June 8th, 2018 09:49pm']);
+    assert.deepEqual(findAll('.rounds-list-item').map((item) => item.textContent.trim()), ['June 9th, 2018 9:49pm', 'June 8th, 2018 9:49pm']);
   });
 });

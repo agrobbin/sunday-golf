@@ -2,7 +2,7 @@
   {{#if model}}
     {{#each (sort-by 'createdAt:desc' model) as |round|}}
       <div class="rounds-list-item">
-        {{link-to (moment-format round.createdAt 'MMMM Do, YYYY hh:mma') 'round' round.id}}
+        {{link-to (moment-format round.createdAt 'MMMM Do, YYYY h:mma') 'round' round.id}}
       </div>
     {{/each}}
   {{else}}
