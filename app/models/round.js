@@ -15,12 +15,12 @@ export default DS.Model.extend({
   init() {
     this._super(...arguments);
 
-    if (isBlank(this.get('createdAt'))) { this.set('createdAt', new Date()); }
+    if (isBlank(this.createdAt)) { this.set('createdAt', new Date()); }
   },
 
   stats: computed('scores.@each', function() {
     return DS.PromiseObject.create({
-      promise: this.get('scores').then((scores) => Stats.create({ scores }))
+      promise: this.scores.then((scores) => Stats.create({ scores }))
     });
   })
 });

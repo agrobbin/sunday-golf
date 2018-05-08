@@ -3,20 +3,20 @@ import { computed } from '@ember/object';
 
 export default EmberObject.extend({
   unsortedHoles: computed('scores.@each.hole', function() {
-    return this.get('scores').mapBy('hole').uniqBy('number');
+    return this.scores.mapBy('hole').uniqBy('number');
   }),
 
   sortedHoles: computed('unsortedHoles.@each.number', function() {
-    return this.get('unsortedHoles').sortBy('number');
+    return this.unsortedHoles.sortBy('number');
   }),
 
   holes: computed('sortedHoles', 'scores.@each.netToPar', function() {
     let netToParRunningTotal = 0;
 
-    return this.get('sortedHoles').map((hole) => {
-      const holeScores = this.get('scores').filterBy('hole.number', hole.number);
+    return this.sortedHoles.map((hole) => {
+      const holeScores = this.scores.filterBy('hole.number', hole.number);
 
-      if (holeScores.mapBy('gross').compact().get('length') === 0) { return { hole }; }
+      if (holeScores.mapBy('gross').compact().length === 0) { return { hole }; }
 
       const score = this._sumScoreForHole(hole, holeScores);
 

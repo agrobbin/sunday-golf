@@ -4,7 +4,7 @@ import { isBlank } from '@ember/utils';
 export default Route.extend({
   model(params) {
     // TODO: `this.store.findRecord` fails for some reason
-    return this.get('store').findAll('round').then((rounds) => {
+    return this.store.findAll('round').then((rounds) => {
       return rounds.findBy('id', params.id);
     });
   },

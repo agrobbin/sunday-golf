@@ -11,15 +11,15 @@ export default DS.Model.extend({
   init() {
     this._super(...arguments);
 
-    if (isBlank(this.get('createdAt'))) { this.set('createdAt', new Date()); }
+    if (isBlank(this.createdAt)) { this.set('createdAt', new Date()); }
   },
 
   shots: computed('player.bid', 'hole.handicap', function() {
-    let shots = Math.floor(this.get('player.bid') / 18);
+    let shots = Math.floor(this.player.get('bid') / 18);
 
-    const remainder = this.get('player.bid') % 18;
+    const remainder = this.player.get('bid') % 18;
 
-    if (this.get('hole.handicap') <= remainder) {
+    if (this.hole.handicap <= remainder) {
       shots++;
     }
 
@@ -27,20 +27,20 @@ export default DS.Model.extend({
   }),
 
   net: computed('gross', 'shots', function() {
-    if (isBlank(this.get('gross'))) { return; }
+    if (isBlank(this.gross)) { return; }
 
-    return this.get('gross') - this.get('shots');
+    return this.gross - this.shots;
   }),
 
   grossToPar: computed('gross', 'hole.par', function() {
-    if (isBlank(this.get('gross'))) { return; }
+    if (isBlank(this.gross)) { return; }
 
-    return this.get('gross') - this.get('hole.par');
+    return this.gross - this.hole.par;
   }),
 
   netToPar: computed('net', 'hole.par', function() {
-    if (isBlank(this.get('net'))) { return; }
+    if (isBlank(this.net)) { return; }
 
-    return this.get('net') - this.get('hole.par');
+    return this.net - this.hole.par;
   })
 });

@@ -5,8 +5,8 @@ export default Controller.extend({
 
   actions: {
     createRound() {
-      this.get('store').createRecord('round').save().then((round) => {
-        this.transitionToRoute('round', round.get('id'));
+      this.store.createRecord('round').save().then((round) => {
+        this.transitionToRoute('round', round.id);
       });
     }
   }

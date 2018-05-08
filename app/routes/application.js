@@ -7,7 +7,7 @@ export default Route.extend({
   beforeModel() {
     this._super(...arguments);
 
-    return this.get('indexedDb').setup();
+    return this.indexedDb.setup();
   },
 
   actions: {

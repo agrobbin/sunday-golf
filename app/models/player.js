@@ -16,21 +16,21 @@ export default DS.Model.extend({
   init() {
     this._super(...arguments);
 
-    if (isBlank(this.get('createdAt'))) { this.set('createdAt', new Date()); }
+    if (isBlank(this.createdAt)) { this.set('createdAt', new Date()); }
   },
 
   totalGross: computed('scores.@each.gross', function() {
-    const scores = this.get('scores').mapBy('gross').compact();
+    const scores = this.scores.mapBy('gross').compact();
 
-    if (scores.get('length') > 0) {
+    if (scores.length > 0) {
       return scores.reduce((a, b) => a + b, 0);
     }
   }),
 
   totalNet: computed('scores.@each.net', function() {
-    const scores = this.get('scores').mapBy('net').compact();
+    const scores = this.scores.mapBy('net').compact();
 
-    if (scores.get('length') > 0) {
+    if (scores.length > 0) {
       return scores.reduce((a, b) => a + b, 0);
     }
   })

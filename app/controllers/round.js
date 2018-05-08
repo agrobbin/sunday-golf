@@ -43,16 +43,16 @@ export default Controller.extend({
 
   actions: {
     addNewPlayer() {
-      const player = this.get('store').createRecord('player', {
-        round: this.get('model'),
-        name: this.get('newPlayerName'),
-        handicap: this.get('newPlayerHandicap'),
-        bid: this.get('newPlayerBid')
+      const player = this.store.createRecord('player', {
+        round: this.model,
+        name: this.newPlayerName,
+        handicap: this.newPlayerHandicap,
+        bid: this.newPlayerBid
       });
 
       player.save().then(() => {
         // TODO: would be nice to do this atomically as part of `createRecord('player')` above
-        const scores = this.get('course.holes').map((hole) => this.get('store').createRecord('score', { player: player, hole: hole }));
+        const scores = this.course.holes.map((hole) => this.store.createRecord('score', { player: player, hole: hole }));
 
         all(scores.map((score) => score.save())).then(() => {
           this.resetNewPlayer();
@@ -61,7 +61,7 @@ export default Controller.extend({
     },
 
     delete() {
-      this.get('model').destroyRecord().then(() => {
+      this.model.destroyRecord().then(() => {
         this.transitionToRoute('rounds');
       });
     }
