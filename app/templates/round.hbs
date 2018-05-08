@@ -48,7 +48,7 @@
 
       {{#if model.players}}
         {{#each (sort-by "createdAt" model.players) as |player|}}
-          {{player-scorecard player=player course=course}}
+          {{player-scorecard player=player}}
         {{/each}}
 
         <tr class="scorecard-heading">
