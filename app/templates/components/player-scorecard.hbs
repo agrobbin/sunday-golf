@@ -1,6 +1,6 @@
-<td>{{player.name}} (CH: {{player.handicap}}, Bid: {{player.bid}})</td>
+<td>{{@player.name}} (CH: {{@player.handicap}}, Bid: {{@player.bid}})</td>
 
-{{#each (sort-by "hole.number" player.scores) as |score|}}
+{{#each (sort-by "hole.number" @player.scores) as |score|}}
   <td class="player-scorecard-score">
     <input type="number" min="0" tabindex={{score.hole.number}} value={{unbound score.gross}} oninput={{action (action "save" score) value="target.value"}} onfocus={{action 'selectAll' value="target"}}>
 
@@ -12,5 +12,5 @@
   </td>
 {{/each}}
 
-<td>{{player.totalGross}}</td>
-<td>{{player.totalNet}}</td>
+<td>{{@player.totalGross}}</td>
+<td>{{@player.totalNet}}</td>
