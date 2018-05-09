@@ -54,10 +54,11 @@ button, input[type="submit"], a.button {
 
 body {
   background-color: #fff;
+  color: $blue-color;
   font-family: $font-family;
   margin: 0;
   padding: 0;
-  color: $blue-color;
+  text-size-adjust: 100%;
 }
 
 section#content {
