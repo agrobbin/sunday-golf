@@ -139,8 +139,8 @@ module('Acceptance | round', function(hooks) {
     assert.equal($('tr.player-scorecard:eq(2) td').get(20).textContent.trim(), '11');
 
     // team nets
-    assert.deepEqual($('table tr:eq(8) td').map(function () { return $(this).text().trim() }).get(), ['Team net per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
-    assert.deepEqual($('table tr:eq(9) td').map(function () { return $(this).text().trim() }).get(), ['Team net running total', '−1', '−4', '−3', '−7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+    assert.deepEqual($('table tr:eq(8) td').map(function () { return $(this).text().trim() }).get(), ['Per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+    assert.deepEqual($('table tr:eq(9) td').map(function () { return $(this).text().trim() }).get(), ['Total', '−1', '−4', '−3', '−7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
   });
 
   test('deleting a round', async function(assert) {
