@@ -1,4 +1,10 @@
-<td>{{@player.name}} (CH: {{@player.handicap}}, Bid: {{@player.bid}})</td>
+<td class="player-scorecard-name-handicaps">
+  {{@player.name}}
+
+  <span class="player-handicaps">
+    CH: {{@player.handicap}} Bid: {{@player.bid}}
+  </span>
+</td>
 
 {{#each (sort-by "hole.number" @player.scores) as |score|}}
   <td class="player-scorecard-score">

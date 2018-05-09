@@ -84,6 +84,23 @@ $scorecard-width: 1220px;
         }
       }
 
+      > td.player-scorecard-name-handicaps {
+        position: relative;
+
+        span.player-handicaps {
+          font-size: 11px;
+          position: absolute;
+          left: 10px;
+          bottom: 0;
+          background-color: #e9e9e9;
+          padding: 0 5px;
+          border: {
+            top-left-radius: 5px;
+            top-right-radius: 5px;
+          }
+        }
+      }
+
       > td.player-scorecard-score {
         padding: 0;
         position: relative;

@@ -59,8 +59,8 @@ module('Acceptance | round', function(hooks) {
 
     assert.equal(findAll('table tr.scorecard-heading')[0].textContent.trim(), 'Team (2 players)');
     assert.equal(findAll('tr.player-scorecard').length, 2);
-    assert.equal($('tr.player-scorecard:eq(0) td:eq(0)').text().trim(), 'Alex (CH: 10, Bid: 8)');
-    assert.equal($('tr.player-scorecard:eq(1) td:eq(0)').text().trim(), 'Adam (CH: 1, Bid: 0)');
+    assert.equal($('tr.player-scorecard:eq(0) td:eq(0)').text().trim(), 'Alex\n\n  \n    CH: 10 Bid: 8');
+    assert.equal($('tr.player-scorecard:eq(1) td:eq(0)').text().trim(), 'Adam\n\n  \n    CH: 1 Bid: 0');
   });
 
   test('seeing the shots of a player', async function(assert) {
