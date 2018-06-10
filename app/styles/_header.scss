@@ -85,7 +85,22 @@ header {
           }
         }
 
+        @keyframes pop-down {
+          0% {
+            top: 0;
+          }
+
+          25% {
+            top: 70px;
+          }
+
+          100% {
+            top: 65px;
+          }
+        }
+
         ~ nav {
+          animation: pop-down 0.25s;
           opacity: 1;
           visibility: visible;
         }
@@ -103,7 +118,7 @@ header {
         display: block;
         height: 4px;
         margin-bottom: 5px;
-        transition: 0.3s;
+        transition: 0.25s;
       }
     }
 
@@ -111,7 +126,7 @@ header {
       opacity: 0;
       position: absolute;
       top: 65px;
-      transition: 0.3s;
+      transition: 0.25s;
       visibility: hidden;
       width: 100%;
 
