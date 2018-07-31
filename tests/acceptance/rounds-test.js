@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, find, findAll } from '@ember/test-helpers';
+import { visit, findAll } from '@ember/test-helpers';
 import { setupApplicationTest } from '../helpers/setup-application-test';
 
 module('Acceptance | rounds', function(hooks) {
@@ -8,7 +8,7 @@ module('Acceptance | rounds', function(hooks) {
   test('there are no rounds', async function(assert) {
     await visit('/rounds');
 
-    assert.equal(find('.rounds-list').textContent.trim(), 'You have no saved rounds.');
+    assert.dom('.rounds-list').hasText('You have no saved rounds.');
   });
 
   test('the rounds are listed in reverse-chronological order', async function(assert) {

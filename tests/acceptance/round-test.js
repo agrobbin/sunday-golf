@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, currentURL, find, click, findAll, fillIn } from '@ember/test-helpers';
+import { visit, currentURL, click, findAll, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from '../helpers/setup-application-test';
 import addPlayer from '../helpers/add-player';
 import moment from 'moment';
@@ -17,7 +17,7 @@ module('Acceptance | round', function(hooks) {
   test('creating a round', async function(assert) {
     await visit('/rounds');
 
-    assert.equal(find('nav button').textContent.trim(), 'New round');
+    assert.dom('nav button').hasText('New round');
 
     await click('nav button');
 
@@ -31,7 +31,7 @@ module('Acceptance | round', function(hooks) {
   test('viewing a round', async function(assert) {
     await visit('/rounds');
 
-    assert.equal(find('nav button').textContent.trim(), 'New round');
+    assert.dom('nav button').hasText('New round');
 
     await click('nav button');
 
@@ -41,32 +41,32 @@ module('Acceptance | round', function(hooks) {
 
     const createdAt = round.json.attributes['created-at'];
 
-    assert.equal(findAll('div.scorecard-heading')[0].textContent.trim(), `Delete\n    \n\n    ${moment(createdAt).format('MMMM Do, YYYY')}`);
+    assert.dom(findAll('div.scorecard-heading')[0]).hasText(`Delete\n    \n\n    ${moment(createdAt).format('MMMM Do, YYYY')}`);
   });
 
   test('adding players to a round', async function(assert) {
     await visit('/rounds');
 
-    assert.equal(find('nav button').textContent.trim(), 'New round');
+    assert.dom('nav button').hasText('New round');
 
     await click('nav button');
 
     await addPlayer({ name: 'Alex', handicap: 10, bid: 8 }, assert);
 
-    assert.equal(findAll('table tr.scorecard-heading')[0].textContent.trim(), 'Team (1 player)');
+    assert.dom(findAll('table tr.scorecard-heading')[0]).hasText('Team (1 player)');
 
     await addPlayer({ name: 'Adam', handicap: 1, bid: 0 }, assert);
 
-    assert.equal(findAll('table tr.scorecard-heading')[0].textContent.trim(), 'Team (2 players)');
+    assert.dom(findAll('table tr.scorecard-heading')[0]).hasText('Team (2 players)');
     assert.equal(findAll('tr.player-scorecard').length, 2);
-    assert.equal($('tr.player-scorecard:eq(0) td:eq(0)').text().trim(), 'Alex\n\n  \n    CH: 10 Bid: 8');
-    assert.equal($('tr.player-scorecard:eq(1) td:eq(0)').text().trim(), 'Adam\n\n  \n    CH: 1 Bid: 0');
+    assert.dom($('tr.player-scorecard:eq(0) td').get(0)).hasText('Alex\n\n  \n    CH: 10 Bid: 8');
+    assert.dom($('tr.player-scorecard:eq(1) td').get(0)).hasText('Adam\n\n  \n    CH: 1 Bid: 0');
   });
 
   test('seeing the shots of a player', async function(assert) {
     await visit('/rounds');
 
-    assert.equal(find('nav button').textContent.trim(), 'New round');
+    assert.dom('nav button').hasText('New round');
 
     await click('nav button');
 
@@ -95,7 +95,7 @@ module('Acceptance | round', function(hooks) {
   test('inputting player scores and calculating totals', async function(assert) {
     await visit('/rounds');
 
-    assert.equal(find('nav button').textContent.trim(), 'New round');
+    assert.dom('nav button').hasText('New round');
 
     await click('nav button');
 
@@ -103,12 +103,12 @@ module('Acceptance | round', function(hooks) {
     await addPlayer({ name: 'Adam', handicap: 1, bid: 0 }, assert);
     await addPlayer({ name: 'Aaron', handicap: 21, bid: 21 }, assert);
 
-    assert.equal($('tr.player-scorecard:eq(0) td').get(19).textContent.trim(), '');
-    assert.equal($('tr.player-scorecard:eq(0) td').get(20).textContent.trim(), '');
-    assert.equal($('tr.player-scorecard:eq(1) td').get(19).textContent.trim(), '');
-    assert.equal($('tr.player-scorecard:eq(1) td').get(20).textContent.trim(), '');
-    assert.equal($('tr.player-scorecard:eq(2) td').get(19).textContent.trim(), '');
-    assert.equal($('tr.player-scorecard:eq(2) td').get(20).textContent.trim(), '');
+    assert.dom($('tr.player-scorecard:eq(0) td').get(19)).hasText('');
+    assert.dom($('tr.player-scorecard:eq(0) td').get(20)).hasText('');
+    assert.dom($('tr.player-scorecard:eq(1) td').get(19)).hasText('');
+    assert.dom($('tr.player-scorecard:eq(1) td').get(20)).hasText('');
+    assert.dom($('tr.player-scorecard:eq(2) td').get(19)).hasText('');
+    assert.dom($('tr.player-scorecard:eq(2) td').get(20)).hasText('');
 
     // hole 1
     await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(0) input').get(0), '4');
@@ -131,12 +131,12 @@ module('Acceptance | round', function(hooks) {
     await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(3) input').get(0), '3');
 
     // player totals
-    assert.equal($('tr.player-scorecard:eq(0) td').get(19).textContent.trim(), '16');
-    assert.equal($('tr.player-scorecard:eq(0) td').get(20).textContent.trim(), '15');
-    assert.equal($('tr.player-scorecard:eq(1) td').get(19).textContent.trim(), '15');
-    assert.equal($('tr.player-scorecard:eq(1) td').get(20).textContent.trim(), '15');
-    assert.equal($('tr.player-scorecard:eq(2) td').get(19).textContent.trim(), '16');
-    assert.equal($('tr.player-scorecard:eq(2) td').get(20).textContent.trim(), '11');
+    assert.dom($('tr.player-scorecard:eq(0) td').get(19)).hasText('16');
+    assert.dom($('tr.player-scorecard:eq(0) td').get(20)).hasText('15');
+    assert.dom($('tr.player-scorecard:eq(1) td').get(19)).hasText('15');
+    assert.dom($('tr.player-scorecard:eq(1) td').get(20)).hasText('15');
+    assert.dom($('tr.player-scorecard:eq(2) td').get(19)).hasText('16');
+    assert.dom($('tr.player-scorecard:eq(2) td').get(20)).hasText('11');
 
     // team nets
     assert.deepEqual($('table tr:eq(8) td').map(function () { return $(this).text().trim() }).get(), ['Per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
@@ -146,7 +146,7 @@ module('Acceptance | round', function(hooks) {
   test('deleting a round', async function(assert) {
     await visit('/rounds');
 
-    assert.equal(find('nav button').textContent.trim(), 'New round');
+    assert.dom('nav button').hasText('New round');
 
     await click('nav button');
 
