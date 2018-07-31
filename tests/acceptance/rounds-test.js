@@ -20,6 +20,14 @@ module('Acceptance | rounds', function(hooks) {
 
     await visit('/rounds');
 
-    assert.deepEqual(findAll('.rounds-list-item').map((item) => item.textContent.trim()), ['June 9, 2018, 9:49 PM', 'June 8, 2018, 9:49 PM']);
+    const intlOptions = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+    assert.deepEqual(
+      findAll('.rounds-list-item').map((item) => item.textContent.trim()),
+      [
+        new Intl.DateTimeFormat('en-US', intlOptions).format(new Date('2018-06-10T01:49:14.602Z')),
+        new Intl.DateTimeFormat('en-US', intlOptions).format(new Date('2018-06-09T01:49:14.602Z'))
+      ]
+    );
   });
 });
