@@ -1,7 +1,9 @@
 <header>
   <img src="/assets/images/tpc-logo.png" alt="" id="logo">
 
-  <h1>Sunday Golf Game</h1>
+  <h1>
+    {{t "application.title"}}
+  </h1>
 
   {{input type="checkbox" id="nav-toggle" checked=mobileNavIsOpen}}
 
@@ -13,10 +15,10 @@
 
   <nav>
     <button {{action 'createRound'}}>
-      New round
+      {{t "application.nav.newRound"}}
     </button>
 
-    {{link-to 'Stored rounds' 'rounds' class='button'}}
+    {{link-to (t 'application.nav.storedRounds') 'rounds' class='button'}}
   </nav>
 </header>
 

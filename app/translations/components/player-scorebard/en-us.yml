@@ -1,0 +1,3 @@
+components:
+  playerScorecard:
+    handicaps: 'CH: {handicap} Bid: {bid}'

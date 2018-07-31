@@ -1,0 +1,21 @@
+round:
+  delete: Delete
+  scorecard:
+    holes:
+      hole: Hole
+      gross: Gross
+      net: Net
+    par: Par
+    handicap: Handicap
+    team: 'Team ({count} {count, plural, =1 {player} other {players}})'
+    none: 'There are no players yet.'
+    scores:
+      net: Net scores
+      perHole: Per hole
+      total: Total
+  form:
+    title: Add a player
+    name: Name
+    handicap: Handicap
+    bid: Bid
+    submit: Add

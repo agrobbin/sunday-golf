@@ -1,0 +1,5 @@
+application:
+  title: Sunday Golf Game
+  nav:
+    newRound: New round
+    storedRounds: Stored rounds

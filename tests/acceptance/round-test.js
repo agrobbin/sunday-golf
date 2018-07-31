@@ -2,7 +2,6 @@ import { module, test } from 'qunit';
 import { visit, currentURL, click, findAll, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from '../helpers/setup-application-test';
 import addPlayer from '../helpers/add-player';
-import moment from 'moment';
 import $ from 'jquery';
 
 module('Acceptance | round', function(hooks) {
@@ -39,9 +38,9 @@ module('Acceptance | round', function(hooks) {
     const rounds = await indexedDb.findAll('round');
     const round = rounds[0];
 
-    const createdAt = round.json.attributes['created-at'];
+    const createdAt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(round.json.attributes['created-at']));
 
-    assert.dom(findAll('div.scorecard-heading')[0]).hasText(`Delete\n    \n\n    ${moment(createdAt).format('MMMM Do, YYYY')}`);
+    assert.dom(findAll('div.scorecard-heading')[0]).hasText(`Delete\n    \n\n    ${createdAt}`);
   });
 
   test('adding players to a round', async function(assert) {
