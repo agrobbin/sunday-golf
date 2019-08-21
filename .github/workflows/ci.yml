@@ -1,0 +1,23 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 6.x
+
+    - run: npm install -g yarn
+
+    - run: yarn install
+
+    - run: yarn lint:js
+
+    - run: yarn test
