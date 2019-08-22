@@ -1,11 +1,11 @@
 <div class="rounds-list">
-  {{#each (sort-by 'createdAt:desc' model) as |round|}}
+  {{#each (sort-by "createdAt:desc" model) as |round|}}
     <div class="rounds-list-item">
-      {{link-to (format-time round.createdAt format='long') 'round' round.id}}
+      {{link-to (format-time round.createdAt format="long") "round" round.id}}
     </div>
   {{else}}
     <p>
-      {{t 'rounds.none'}}
+      {{t "rounds.none"}}
     </p>
   {{/each}}
 </div>

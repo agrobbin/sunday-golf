@@ -1,10 +1,10 @@
 <div class="scorecard">
   <div class="scorecard-heading">
-    <button class="scorecoard-remove-round" {{action 'delete'}}>
-      {{t 'round.delete'}}
+    <button class="scorecoard-remove-round" {{action "delete"}}>
+      {{t "round.delete"}}
     </button>
 
-    {{format-date model.createdAt format='long'}}
+    {{format-date model.createdAt format="long"}}
   </div>
 
   <div class="scorecard-scroller">
@@ -12,7 +12,7 @@
       <tr class="scorecard-holes">
         <td>
           <b>
-            {{t 'round.scorecard.holes.hole'}}
+            {{t "round.scorecard.holes.hole"}}
           </b>
         </td>
 
@@ -21,17 +21,17 @@
         {{/each}}
 
         <td>
-          {{t 'round.scorecard.holes.gross'}}
+          {{t "round.scorecard.holes.gross"}}
         </td>
 
         <td>
-          {{t 'round.scorecard.holes.net'}}
+          {{t "round.scorecard.holes.net"}}
         </td>
       </tr>
 
       <tr>
         <td>
-          {{t 'round.scorecard.par'}}
+          {{t "round.scorecard.par"}}
         </td>
 
         {{#each course.holes as |hole|}}
@@ -44,7 +44,7 @@
 
       <tr>
         <td>
-          {{t 'round.scorecard.handicap'}}
+          {{t "round.scorecard.handicap"}}
         </td>
 
         {{#each course.holes as |hole|}}
@@ -57,7 +57,7 @@
 
       <tr class="scorecard-heading">
         <th colspan="21">
-          {{t 'round.scorecard.team' count=model.players.length}}
+          {{t "round.scorecard.team" count=model.players.length}}
         </th>
       </tr>
 
@@ -68,14 +68,14 @@
 
         <tr class="scorecard-heading">
           <th colspan="21">
-            {{t 'round.scorecard.scores.net'}}
+            {{t "round.scorecard.scores.net"}}
           </th>
         </tr>
 
         <tr>
           <td>
             <b>
-              {{t 'round.scorecard.scores.perHole'}}
+              {{t "round.scorecard.scores.perHole"}}
             </b>
           </td>
 
@@ -90,7 +90,7 @@
         <tr>
           <td>
             <b>
-              {{t 'round.scorecard.scores.total'}}
+              {{t "round.scorecard.scores.total"}}
             </b>
           </td>
 
@@ -104,7 +104,7 @@
       {{else}}
         <tr class="scorecard-no-players">
           <td colspan="21">
-            {{t 'round.scorecard.none'}}
+            {{t "round.scorecard.none"}}
           </td>
         </tr>
       {{/if}}
@@ -112,14 +112,14 @@
   </div>
 </div>
 
-<form class="scorecard-add-player" {{action 'addNewPlayer' on='submit'}}>
+<form class="scorecard-add-player" {{action "addNewPlayer" on="submit"}}>
   <h3>
-    {{t 'round.form.title'}}
+    {{t "round.form.title"}}
   </h3>
 
   <label for="player_name">
     <span>
-      {{t 'round.form.name'}}
+      {{t "round.form.name"}}
     </span>
 
     {{input type="text" name="player_name" value=newPlayerName placeholder="Name" required="true"}}
@@ -127,7 +127,7 @@
 
   <label for="player_handicap">
     <span>
-      {{t 'round.form.handicap'}}
+      {{t "round.form.handicap"}}
     </span>
 
     {{input type="number" name="player_handicap" value=newPlayerHandicap placeholder="Handicap" required="true"}}
@@ -135,11 +135,11 @@
 
   <label for="player_bid">
     <span>
-      {{t 'round.form.bid'}}
+      {{t "round.form.bid"}}
     </span>
 
     {{input type="number" name="player_bid" value=newPlayerBid placeholder="Bid" required="true"}}
   </label>
 
-  <input type="submit" value={{t 'round.form.submit'}} disabled={{isNewPlayerInvalid}}>
+  <input type="submit" value={{t "round.form.submit"}} disabled={{isNewPlayerInvalid}}>
 </form>
