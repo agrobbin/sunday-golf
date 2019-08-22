@@ -2,12 +2,32 @@ import Stats from './stats';
 import DS from 'ember-data';
 import { isBlank } from '@ember/utils';
 import { computed } from '@ember/object';
-import hasManyThrough from 'ember-data-has-many-through/macros/has-many-through';
+import { all } from 'rsvp';
 
 export default DS.Model.extend({
   players: DS.hasMany({ dependent: 'destroy' }),
 
-  scores: hasManyThrough('players'),
+  scores: computed('players.@each', function() {
+    const scoreChanged = () => {
+      // ignore observer callbacks when the `Round` has been destroyed
+      if (this.isDestroyed) return;
+
+      this.notifyPropertyChange('scores');
+    };
+
+    return DS.PromiseArray.create({
+      promise: this.players.then((players) => {
+        return all(players.mapBy('scores')).then((playerScores) => {
+          // add observers for when a `Score` changes
+          players.invoke('addObserver', 'scores.@each.isDeleted', this, scoreChanged);
+
+          const flattenedScores = playerScores.flatMap((scores) => scores.toArray());
+
+          return flattenedScores.rejectBy('isDeleted');
+        });
+      })
+    });
+  }),
 
   createdAt: DS.attr('date'),
   updatedAt: DS.attr('date'),
