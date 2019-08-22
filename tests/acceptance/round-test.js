@@ -57,7 +57,7 @@ module('Acceptance | round', function(hooks) {
     await addPlayer({ name: 'Adam', handicap: 1, bid: 0 }, assert);
 
     assert.dom(findAll('table tr.scorecard-heading')[0]).hasText('Team (2 players)');
-    assert.equal(findAll('tr.player-scorecard').length, 2);
+    assert.dom('tr.player-scorecard').exists({ count: 2 });
     assert.dom($('tr.player-scorecard:eq(0) td').get(0)).hasText('Alex\n\n  \n    CH: 10 Bid: 8');
     assert.dom($('tr.player-scorecard:eq(1) td').get(0)).hasText('Adam\n\n  \n    CH: 1 Bid: 0');
   });
