@@ -12,12 +12,15 @@ jobs:
 
     - uses: actions/setup-node@v1
       with:
-        node-version: 6.x
+        node-version: 12.x
 
     - run: npm install -g yarn
 
     - run: yarn install
 
-    - run: yarn lint:js
+    - name: Lint
+      run: |
+        yarn lint:hbs
+        yarn lint:js
 
     - run: yarn test
