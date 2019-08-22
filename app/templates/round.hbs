@@ -9,105 +9,109 @@
 
   <div class="scorecard-scroller">
     <table>
-      <tr class="scorecard-holes">
-        <td>
-          <b>
-            {{t "round.scorecard.holes.hole"}}
-          </b>
-        </td>
+      <thead>
+        <tr class="scorecard-holes">
+          <td>
+            <b>
+              {{t "round.scorecard.holes.hole"}}
+            </b>
+          </td>
 
-        {{#each course.holes as |hole|}}
-          <td>{{hole.number}}</td>
-        {{/each}}
+          {{#each course.holes as |hole|}}
+            <td>{{hole.number}}</td>
+          {{/each}}
 
-        <td>
-          {{t "round.scorecard.holes.gross"}}
-        </td>
+          <td>
+            {{t "round.scorecard.holes.gross"}}
+          </td>
 
-        <td>
-          {{t "round.scorecard.holes.net"}}
-        </td>
-      </tr>
+          <td>
+            {{t "round.scorecard.holes.net"}}
+          </td>
+        </tr>
 
-      <tr>
-        <td>
-          {{t "round.scorecard.par"}}
-        </td>
+        <tr>
+          <td>
+            {{t "round.scorecard.par"}}
+          </td>
 
-        {{#each course.holes as |hole|}}
-          <td>{{hole.par}}</td>
-        {{/each}}
+          {{#each course.holes as |hole|}}
+            <td>{{hole.par}}</td>
+          {{/each}}
 
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
 
-      <tr>
-        <td>
-          {{t "round.scorecard.handicap"}}
-        </td>
+        <tr>
+          <td>
+            {{t "round.scorecard.handicap"}}
+          </td>
 
-        {{#each course.holes as |hole|}}
-          <td>{{hole.handicap}}</td>
-        {{/each}}
+          {{#each course.holes as |hole|}}
+            <td>{{hole.handicap}}</td>
+          {{/each}}
 
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-
-      <tr class="scorecard-heading">
-        <th colspan="21">
-          {{t "round.scorecard.team" count=model.players.length}}
-        </th>
-      </tr>
-
-      {{#if model.players}}
-        {{#each (sort-by "createdAt" model.players) as |player|}}
-          {{player-scorecard player=player}}
-        {{/each}}
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
 
         <tr class="scorecard-heading">
           <th colspan="21">
-            {{t "round.scorecard.scores.net"}}
+            {{t "round.scorecard.team" count=model.players.length}}
           </th>
         </tr>
+      </thead>
 
-        <tr>
-          <td>
-            <b>
-              {{t "round.scorecard.scores.perHole"}}
-            </b>
-          </td>
-
-          {{#each model.stats.holes as |hole|}}
-            <td>{{hole.netToPar}}</td>
+      <tbody>
+        {{#if model.players}}
+          {{#each (sort-by "createdAt" model.players) as |player|}}
+            {{player-scorecard player=player}}
           {{/each}}
 
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
+          <tr class="scorecard-heading">
+            <th colspan="21">
+              {{t "round.scorecard.scores.net"}}
+            </th>
+          </tr>
 
-        <tr>
-          <td>
-            <b>
-              {{t "round.scorecard.scores.total"}}
-            </b>
-          </td>
+          <tr>
+            <td>
+              <b>
+                {{t "round.scorecard.scores.perHole"}}
+              </b>
+            </td>
 
-          {{#each model.stats.holes as |hole|}}
-            <td>{{hole.netToParRunningTotal}}</td>
-          {{/each}}
+            {{#each model.stats.holes as |hole|}}
+              <td>{{hole.netToPar}}</td>
+            {{/each}}
 
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-      {{else}}
-        <tr class="scorecard-no-players">
-          <td colspan="21">
-            {{t "round.scorecard.none"}}
-          </td>
-        </tr>
-      {{/if}}
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td>
+              <b>
+                {{t "round.scorecard.scores.total"}}
+              </b>
+            </td>
+
+            {{#each model.stats.holes as |hole|}}
+              <td>{{hole.netToParRunningTotal}}</td>
+            {{/each}}
+
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        {{else}}
+          <tr class="scorecard-no-players">
+            <td colspan="21">
+              {{t "round.scorecard.none"}}
+            </td>
+          </tr>
+        {{/if}}
+      </tbody>
     </table>
   </div>
 </div>
