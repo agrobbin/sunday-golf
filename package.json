@@ -55,5 +55,8 @@
   },
   "engines": {
     "node": "8.* || >= 10.*"
+  },
+  "resolutions": {
+    "clean-css": "^4.1.11"
   }
 }
