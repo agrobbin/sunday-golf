@@ -1,12 +1,12 @@
-import DS from 'ember-data';
+import Model, { belongsTo, attr } from '@ember-data/model';
 import { isBlank } from '@ember/utils';
 import { computed } from '@ember/object';
 
-export default DS.Model.extend({
-  player: DS.belongsTo(),
+export default Model.extend({
+  player: belongsTo(),
 
-  hole: DS.attr(),
-  gross: DS.attr('number'),
+  hole: attr(),
+  gross: attr('number'),
 
   init() {
     this._super(...arguments);

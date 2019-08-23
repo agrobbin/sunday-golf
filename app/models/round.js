@@ -1,11 +1,14 @@
 import Stats from './stats';
+import Model, { hasMany, attr } from '@ember-data/model';
 import DS from 'ember-data';
 import { isBlank } from '@ember/utils';
 import { computed } from '@ember/object';
 import { all } from 'rsvp';
 
-export default DS.Model.extend({
-  players: DS.hasMany({ dependent: 'destroy' }),
+const { PromiseArray, PromiseObject } = DS;
+
+export default Model.extend({
+  players: hasMany({ dependent: 'destroy' }),
 
   scores: computed('players.@each', function() {
     const scoreChanged = () => {
@@ -15,7 +18,7 @@ export default DS.Model.extend({
       this.notifyPropertyChange('scores');
     };
 
-    return DS.PromiseArray.create({
+    return PromiseArray.create({
       promise: this.players.then((players) => {
         return all(players.mapBy('scores')).then((playerScores) => {
           // add observers for when a `Score` changes
@@ -29,8 +32,8 @@ export default DS.Model.extend({
     });
   }),
 
-  createdAt: DS.attr('date'),
-  updatedAt: DS.attr('date'),
+  createdAt: attr('date'),
+  updatedAt: attr('date'),
 
   init() {
     this._super(...arguments);
@@ -39,7 +42,7 @@ export default DS.Model.extend({
   },
 
   stats: computed('scores.@each', function() {
-    return DS.PromiseObject.create({
+    return PromiseObject.create({
       promise: this.scores.then((scores) => Stats.create({ scores }))
     });
   })

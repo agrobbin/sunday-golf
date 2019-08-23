@@ -1,17 +1,17 @@
-import DS from 'ember-data';
+import Model, { belongsTo, hasMany, attr } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 
-export default DS.Model.extend({
-  round: DS.belongsTo(),
+export default Model.extend({
+  round: belongsTo(),
 
-  scores: DS.hasMany({ dependent: 'destroy' }),
+  scores: hasMany({ dependent: 'destroy' }),
 
-  name: DS.attr(),
-  handicap: DS.attr('number'),
-  bid: DS.attr('number'),
-  createdAt: DS.attr('date'),
-  updatedAt: DS.attr('date'),
+  name: attr(),
+  handicap: attr('number'),
+  bid: attr('number'),
+  createdAt: attr('date'),
+  updatedAt: attr('date'),
 
   init() {
     this._super(...arguments);
