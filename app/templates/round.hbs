@@ -4,7 +4,7 @@
       {{t "round.delete"}}
     </button>
 
-    {{format-date model.createdAt format="long"}}
+    {{format-date this.model.createdAt format="long"}}
   </div>
 
   <div class="scorecard-scroller">
@@ -17,7 +17,7 @@
             </b>
           </td>
 
-          {{#each course.holes as |hole|}}
+          {{#each this.course.holes as |hole|}}
             <td>{{hole.number}}</td>
           {{/each}}
 
@@ -35,7 +35,7 @@
             {{t "round.scorecard.par"}}
           </td>
 
-          {{#each course.holes as |hole|}}
+          {{#each this.course.holes as |hole|}}
             <td>{{hole.par}}</td>
           {{/each}}
 
@@ -48,7 +48,7 @@
             {{t "round.scorecard.handicap"}}
           </td>
 
-          {{#each course.holes as |hole|}}
+          {{#each this.course.holes as |hole|}}
             <td>{{hole.handicap}}</td>
           {{/each}}
 
@@ -58,14 +58,14 @@
 
         <tr class="scorecard-heading">
           <th colspan="21">
-            {{t "round.scorecard.team" count=model.players.length}}
+            {{t "round.scorecard.team" count=this.model.players.length}}
           </th>
         </tr>
       </thead>
 
       <tbody>
-        {{#if model.players}}
-          {{#each (sort-by "createdAt" model.players) as |player|}}
+        {{#if this.model.players}}
+          {{#each (sort-by "createdAt" this.model.players) as |player|}}
             <PlayerScorecard @player={{player}} />
           {{/each}}
 
@@ -82,7 +82,7 @@
               </b>
             </td>
 
-            {{#each model.stats.holes as |hole|}}
+            {{#each this.model.stats.holes as |hole|}}
               <td>{{hole.netToPar}}</td>
             {{/each}}
 
@@ -97,7 +97,7 @@
               </b>
             </td>
 
-            {{#each model.stats.holes as |hole|}}
+            {{#each this.model.stats.holes as |hole|}}
               <td>{{hole.netToParRunningTotal}}</td>
             {{/each}}
 
@@ -126,7 +126,7 @@
       {{t "round.form.name"}}
     </span>
 
-    <Input @type="text" @name="player_name" @value={{newPlayerName}} @placeholder="Name" @required="true" />
+    <Input @type="text" @name="player_name" @value={{this.newPlayerName}} @placeholder="Name" @required="true" />
   </label>
 
   <label for="player_handicap">
@@ -134,7 +134,7 @@
       {{t "round.form.handicap"}}
     </span>
 
-    <Input @type="number" @name="player_handicap" @value={{newPlayerHandicap}} @placeholder="Handicap" @required="true" />
+    <Input @type="number" @name="player_handicap" @value={{this.newPlayerHandicap}} @placeholder="Handicap" @required="true" />
   </label>
 
   <label for="player_bid">
@@ -142,8 +142,8 @@
       {{t "round.form.bid"}}
     </span>
 
-    <Input @type="number" @name="player_bid" @value={{newPlayerBid}} @placeholder="Bid" @required="true" />
+    <Input @type="number" @name="player_bid" @value={{this.newPlayerBid}} @placeholder="Bid" @required="true" />
   </label>
 
-  <input type="submit" value={{t "round.form.submit"}} disabled={{isNewPlayerInvalid}}>
+  <input type="submit" value={{t "round.form.submit"}} disabled={{this.isNewPlayerInvalid}}>
 </form>
