@@ -13,8 +13,8 @@ export default Component.extend({
       score.save();
     },
 
-    selectAll(el) {
-      this.$(el).select();
+    selectAll(element) {
+      element.select();
     }
   }
 });

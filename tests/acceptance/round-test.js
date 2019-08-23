@@ -1,8 +1,7 @@
 import { module, test } from 'qunit';
-import { visit, currentURL, click, findAll, fillIn } from '@ember/test-helpers';
+import { visit, currentURL, click, findAll, find, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from '../helpers/setup-application-test';
 import addPlayer from '../helpers/add-player';
-import $ from 'jquery';
 
 module('Acceptance | round', function(hooks) {
   setupApplicationTest(hooks);
@@ -58,8 +57,8 @@ module('Acceptance | round', function(hooks) {
 
     assert.dom(findAll('table tr.scorecard-heading')[0]).hasText('Team (2 players)');
     assert.dom('tr.player-scorecard').exists({ count: 2 });
-    assert.dom($('tr.player-scorecard:eq(0) td').get(0)).hasText('Alex\n\n  \n    CH: 10 Bid: 8');
-    assert.dom($('tr.player-scorecard:eq(1) td').get(0)).hasText('Adam\n\n  \n    CH: 1 Bid: 0');
+    assert.dom(find('tr.player-scorecard:nth-child(1) td')).hasText('Alex\n\n  \n    CH: 10 Bid: 8');
+    assert.dom(find('tr.player-scorecard:nth-child(2) td')).hasText('Adam\n\n  \n    CH: 1 Bid: 0');
   });
 
   test('seeing the shots of a player', async function(assert) {
@@ -71,24 +70,24 @@ module('Acceptance | round', function(hooks) {
 
     await addPlayer({ name: 'Alex', handicap: 20, bid: 19 }, assert);
 
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(0) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(1) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(2) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(3) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(4) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(5) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(6) .shots .shots-shot').length, 2); // 7th hole, #1 handicap hole
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(7) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(8) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(9) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(10) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(11) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(12) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(13) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(14) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(15) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(16) .shots .shots-shot').length, 1);
-    assert.equal($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(17) .shots .shots-shot').length, 1);
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(2) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(3) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(4) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(5) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(6) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(7) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(8) .shots .shots-shot').exists({ count: 2 }); // 7th hole, #1 handicap hole
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(9) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(10) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(11) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(12) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(13) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(14) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(15) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(16) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(17) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(18) .shots .shots-shot').exists({ count: 1 });
+    assert.dom('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(19) .shots .shots-shot').exists({ count: 1 });
   });
 
   test('inputting player scores and calculating totals', async function(assert) {
@@ -102,44 +101,44 @@ module('Acceptance | round', function(hooks) {
     await addPlayer({ name: 'Adam', handicap: 1, bid: 0 }, assert);
     await addPlayer({ name: 'Aaron', handicap: 21, bid: 21 }, assert);
 
-    assert.dom($('tr.player-scorecard:eq(0) td').get(19)).hasText('');
-    assert.dom($('tr.player-scorecard:eq(0) td').get(20)).hasText('');
-    assert.dom($('tr.player-scorecard:eq(1) td').get(19)).hasText('');
-    assert.dom($('tr.player-scorecard:eq(1) td').get(20)).hasText('');
-    assert.dom($('tr.player-scorecard:eq(2) td').get(19)).hasText('');
-    assert.dom($('tr.player-scorecard:eq(2) td').get(20)).hasText('');
+    assert.dom('tr.player-scorecard:nth-child(1) td:nth-child(20)').hasText('');
+    assert.dom('tr.player-scorecard:nth-child(1) td:nth-child(21)').hasText('');
+    assert.dom('tr.player-scorecard:nth-child(2) td:nth-child(20)').hasText('');
+    assert.dom('tr.player-scorecard:nth-child(2) td:nth-child(21)').hasText('');
+    assert.dom('tr.player-scorecard:nth-child(3) td:nth-child(20)').hasText('');
+    assert.dom('tr.player-scorecard:nth-child(3) td:nth-child(21)').hasText('');
 
     // hole 1
-    await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(0) input').get(0), '4');
-    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(0) input').get(0), '4');
-    await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(0) input').get(0), '4');
+    await fillIn('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(2) input', '4');
+    await fillIn('tr.player-scorecard:nth-child(2) td.player-scorecard-score:nth-child(2) input', '4');
+    await fillIn('tr.player-scorecard:nth-child(3) td.player-scorecard-score:nth-child(2) input', '4');
 
     // hole 2
-    await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(1) input').get(0), '5');
-    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(1) input').get(0), '5');
-    await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(1) input').get(0), '5');
+    await fillIn('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(3) input', '5');
+    await fillIn('tr.player-scorecard:nth-child(2) td.player-scorecard-score:nth-child(3) input', '5');
+    await fillIn('tr.player-scorecard:nth-child(3) td.player-scorecard-score:nth-child(3) input', '5');
 
     // hole 3
-    await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(2) input').get(0), '4');
-    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(2) input').get(0), '3');
-    await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(2) input').get(0), '4');
+    await fillIn('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(4) input', '4');
+    await fillIn('tr.player-scorecard:nth-child(2) td.player-scorecard-score:nth-child(4) input', '3');
+    await fillIn('tr.player-scorecard:nth-child(3) td.player-scorecard-score:nth-child(4) input', '4');
 
     // hole 4
-    await fillIn($('tr.player-scorecard:eq(0) td.player-scorecard-score:eq(3) input').get(0), '3');
-    await fillIn($('tr.player-scorecard:eq(1) td.player-scorecard-score:eq(3) input').get(0), '3');
-    await fillIn($('tr.player-scorecard:eq(2) td.player-scorecard-score:eq(3) input').get(0), '3');
+    await fillIn('tr.player-scorecard:nth-child(1) td.player-scorecard-score:nth-child(5) input', '3');
+    await fillIn('tr.player-scorecard:nth-child(2) td.player-scorecard-score:nth-child(5) input', '3');
+    await fillIn('tr.player-scorecard:nth-child(3) td.player-scorecard-score:nth-child(5) input', '3');
 
     // player totals
-    assert.dom($('tr.player-scorecard:eq(0) td').get(19)).hasText('16');
-    assert.dom($('tr.player-scorecard:eq(0) td').get(20)).hasText('15');
-    assert.dom($('tr.player-scorecard:eq(1) td').get(19)).hasText('15');
-    assert.dom($('tr.player-scorecard:eq(1) td').get(20)).hasText('15');
-    assert.dom($('tr.player-scorecard:eq(2) td').get(19)).hasText('16');
-    assert.dom($('tr.player-scorecard:eq(2) td').get(20)).hasText('11');
+    assert.dom('tr.player-scorecard:nth-child(1) td:nth-child(20)').hasText('16');
+    assert.dom('tr.player-scorecard:nth-child(1) td:nth-child(21)').hasText('15');
+    assert.dom('tr.player-scorecard:nth-child(2) td:nth-child(20)').hasText('15');
+    assert.dom('tr.player-scorecard:nth-child(2) td:nth-child(21)').hasText('15');
+    assert.dom('tr.player-scorecard:nth-child(3) td:nth-child(20)').hasText('16');
+    assert.dom('tr.player-scorecard:nth-child(3) td:nth-child(21)').hasText('11');
 
     // team nets
-    assert.deepEqual($('table tr:eq(8) td').map(function () { return $(this).text().trim() }).get(), ['Per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
-    assert.deepEqual($('table tr:eq(9) td').map(function () { return $(this).text().trim() }).get(), ['Total', '−1', '−4', '−3', '−7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+    assert.deepEqual(findAll('table tfoot tr:nth-child(2) td').map((el) => el.textContent.trim()), ['Per hole', '−1', '−3', '+1', '−4', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
+    assert.deepEqual(findAll('table tfoot tr:nth-child(3) td').map((el) => el.textContent.trim()), ['Total', '−1', '−4', '−3', '−7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']);
   });
 
   test('deleting a round', async function(assert) {
