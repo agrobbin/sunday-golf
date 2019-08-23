@@ -1,7 +1,9 @@
 <div class="rounds-list">
   {{#each (sort-by "createdAt:desc" model) as |round|}}
     <div class="rounds-list-item">
-      {{link-to (format-time round.createdAt format="long") "round" round.id}}
+      <LinkTo @route="round" @model={{round.id}}>
+        {{format-time round.createdAt format="long"}}
+      </LinkTo>
     </div>
   {{else}}
     <p>

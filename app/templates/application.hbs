@@ -5,7 +5,7 @@
     {{t "application.title"}}
   </h1>
 
-  {{input type="checkbox" id="nav-toggle" checked=mobileNavIsOpen}}
+  <Input @type="checkbox" @id="nav-toggle" @checked={{mobileNavIsOpen}} />
 
   <label id="nav-hamburger" for="nav-toggle">
     <span></span>
@@ -18,7 +18,7 @@
       {{t "application.nav.newRound"}}
     </button>
 
-    {{link-to (t "application.nav.storedRounds") "rounds" class="button"}}
+    <LinkTo @route="rounds" @class="button">{{t "application.nav.storedRounds"}}</LinkTo>
   </nav>
 </header>
 
