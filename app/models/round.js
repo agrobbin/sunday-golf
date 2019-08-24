@@ -10,6 +10,15 @@ const { PromiseArray, PromiseObject } = DS;
 export default Model.extend({
   players: hasMany({ dependent: 'destroy' }),
 
+  createdAt: attr('date'),
+  updatedAt: attr('date'),
+
+  init() {
+    this._super(...arguments);
+
+    if (isBlank(this.createdAt)) { this.set('createdAt', new Date()); }
+  },
+
   scores: computed('players.@each', function() {
     const scoreChanged = () => {
       // ignore observer callbacks when the `Round` has been destroyed
@@ -31,15 +40,6 @@ export default Model.extend({
       })
     });
   }),
-
-  createdAt: attr('date'),
-  updatedAt: attr('date'),
-
-  init() {
-    this._super(...arguments);
-
-    if (isBlank(this.createdAt)) { this.set('createdAt', new Date()); }
-  },
 
   stats: computed('scores.@each', function() {
     return PromiseObject.create({
