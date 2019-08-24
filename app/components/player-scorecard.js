@@ -1,10 +1,7 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
 export default class PlayerScorecardComponent extends Component {
-  tagName = 'tr';
-  classNames = ['player-scorecard'];
-
   @action
   save(score, gross) {
     const value = parseInt(gross);
