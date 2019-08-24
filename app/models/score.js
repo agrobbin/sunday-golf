@@ -2,19 +2,20 @@ import Model, { belongsTo, attr } from '@ember-data/model';
 import { isBlank } from '@ember/utils';
 import { computed } from '@ember/object';
 
-export default Model.extend({
-  player: belongsTo(),
+export default class Score extends Model {
+  @belongsTo() player;
 
-  hole: attr(),
-  gross: attr('number'),
+  @attr() hole;
+  @attr('number') gross;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     if (isBlank(this.createdAt)) { this.set('createdAt', new Date()); }
-  },
+  }
 
-  shots: computed('player.bid', 'hole.handicap', function() {
+  @computed('player.bid', 'hole.handicap')
+  get shots() {
     let shots = Math.floor(this.player.get('bid') / 18);
 
     const remainder = this.player.get('bid') % 18;
@@ -24,23 +25,26 @@ export default Model.extend({
     }
 
     return shots;
-  }),
+  }
 
-  net: computed('gross', 'shots', function() {
-    if (isBlank(this.gross)) { return; }
+  @computed('gross', 'shots')
+  get net() {
+    if (isBlank(this.gross)) { return undefined; }
 
     return this.gross - this.shots;
-  }),
+  }
 
-  grossToPar: computed('gross', 'hole.par', function() {
-    if (isBlank(this.gross)) { return; }
+  @computed('gross', 'hole.par')
+  get grossToPar() {
+    if (isBlank(this.gross)) { return undefined; }
 
     return this.gross - this.hole.par;
-  }),
+  }
 
-  netToPar: computed('net', 'hole.par', function() {
-    if (isBlank(this.net)) { return; }
+  @computed('net', 'hole.par')
+  get netToPar() {
+    if (isBlank(this.net)) { return undefined; }
 
     return this.net - this.hole.par;
-  })
-});
+  }
+}

@@ -7,19 +7,20 @@ import { all } from 'rsvp';
 
 const { PromiseArray, PromiseObject } = DS;
 
-export default Model.extend({
-  players: hasMany({ dependent: 'destroy' }),
+export default class Round extends Model {
+  @hasMany({ dependent: 'destroy' }) players;
 
-  createdAt: attr('date'),
-  updatedAt: attr('date'),
+  @attr('date') createdAt;
+  @attr('date') updatedAt;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     if (isBlank(this.createdAt)) { this.set('createdAt', new Date()); }
-  },
+  }
 
-  scores: computed('players.@each', function() {
+  @computed('players.@each')
+  get scores() {
     const scoreChanged = () => {
       // ignore observer callbacks when the `Round` has been destroyed
       if (this.isDestroyed) return;
@@ -39,11 +40,12 @@ export default Model.extend({
         });
       })
     });
-  }),
+  }
 
-  stats: computed('scores.@each', function() {
+  @computed('scores.@each')
+  get stats() {
     return PromiseObject.create({
-      promise: this.scores.then((scores) => Stats.create({ scores }))
+      promise: this.scores.then((scores) => new Stats(scores))
     });
-  })
-});
+  }
+}

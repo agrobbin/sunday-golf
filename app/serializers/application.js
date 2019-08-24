@@ -1,6 +1,6 @@
 import IndexedDbSerializer from 'ember-indexeddb/serializers/indexed-db';
 
-export default IndexedDbSerializer.extend({
+export default class ApplicationSerializer extends IndexedDbSerializer {
   // ensure we can access `hasMany` relationship data like via an API
   serializeHasMany(snapshot, json, relationship) {
     if (!json.hasOwnProperty('relationships')) {
@@ -14,4 +14,4 @@ export default IndexedDbSerializer.extend({
 
     json.relationships[serializedKey] = { links: { related: '--indexeddb--' } };
   }
-});
+}

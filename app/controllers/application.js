@@ -1,13 +1,13 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 
-export default Controller.extend({
-  mobileNavIsOpen: false,
+export default class ApplicationController extends Controller {
+  mobileNavIsOpen = false;
 
-  actions: {
-    createRound() {
-      this.store.createRecord('round').save().then((round) => {
-        this.transitionToRoute('round', round.id);
-      });
-    }
+  @action
+  createRound() {
+    this.store.createRecord('round').save().then((round) => {
+      this.transitionToRoute('round', round.id);
+    });
   }
-});
+}

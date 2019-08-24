@@ -1,11 +1,11 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { computed } from '@ember/object';
 import { all } from 'rsvp';
 
-export default Controller.extend({
-  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
-  course: {
+export default class RoundController extends Controller {
+  course = {
     name: 'TPC Boston',
     holes: [
       { number: 1, par: 4, handicap: 15 },
@@ -27,43 +27,44 @@ export default Controller.extend({
       { number: 17, par: 4, handicap: 6 },
       { number: 18, par: 5, handicap: 4 }
     ]
-  },
+  };
 
-  newPlayerName: null,
-  newPlayerHandicap: null,
-  newPlayerBid: null,
+  newPlayerName = null;
+  newPlayerHandicap = null;
+  newPlayerBid = null;
 
-  isNewPlayerInvalid: computed('newPlayerName', 'newPlayerHandicap', 'newPlayerBid', function() {
+  @computed('newPlayerName', 'newPlayerHandicap', 'newPlayerBid')
+  get isNewPlayerInvalid() {
     return ['newPlayerName', 'newPlayerHandicap', 'newPlayerBid'].any((attr) => isBlank(this.get(attr)));
-  }),
+  }
 
   resetNewPlayer() {
     this.setProperties({ newPlayerName: null, newPlayerHandicap: null, newPlayerBid: null });
-  },
-
-  actions: {
-    addNewPlayer() {
-      const player = this.store.createRecord('player', {
-        round: this.model,
-        name: this.newPlayerName,
-        handicap: this.newPlayerHandicap,
-        bid: this.newPlayerBid
-      });
-
-      player.save().then(() => {
-        // TODO: would be nice to do this atomically as part of `createRecord('player')` above
-        const scores = this.course.holes.map((hole) => this.store.createRecord('score', { player: player, hole: hole }));
-
-        all(scores.map((score) => score.save())).then(() => {
-          this.resetNewPlayer();
-        });
-      });
-    },
-
-    delete() {
-      this.model.destroyRecord().then(() => {
-        this.transitionToRoute('rounds');
-      });
-    }
   }
-});
+
+  @action
+  addNewPlayer() {
+    const player = this.store.createRecord('player', {
+      round: this.model,
+      name: this.newPlayerName,
+      handicap: this.newPlayerHandicap,
+      bid: this.newPlayerBid
+    });
+
+    player.save().then(() => {
+      // TODO: would be nice to do this atomically as part of `createRecord('player')` above
+      const scores = this.course.holes.map((hole) => this.store.createRecord('score', { player: player, hole: hole }));
+
+      all(scores.map((score) => score.save())).then(() => {
+        this.resetNewPlayer();
+      });
+    });
+  }
+
+  @action
+  delete() {
+    this.model.destroyRecord().then(() => {
+      this.transitionToRoute('rounds');
+    });
+  }
+}

@@ -1,20 +1,21 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  tagName: 'tr',
-  classNames: ['player-scorecard'],
+export default class PlayerScorecardComponent extends Component {
+  tagName = 'tr';
+  classNames = ['player-scorecard'];
 
-  actions: {
-    save(score, gross) {
-      const value = parseInt(gross);
+  @action
+  save(score, gross) {
+    const value = parseInt(gross);
 
-      score.set('gross', isNaN(value) ? null : value);
+    score.set('gross', isNaN(value) ? null : value);
 
-      score.save();
-    },
-
-    selectAll(element) {
-      element.select();
-    }
+    score.save();
   }
-});
+
+  @action
+  selectAll(element) {
+    element.select();
+  }
+}

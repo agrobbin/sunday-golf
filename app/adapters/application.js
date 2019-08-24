@@ -1,10 +1,10 @@
 import IndexedDbAdapter from 'ember-indexeddb/adapters/indexed-db';
 import { v4 } from 'ember-uuid';
 
-export default IndexedDbAdapter.extend({
+export default class ApplicationAdapter extends IndexedDbAdapter {
   // support dependent: 'destroy' for `hasMany` relationships
   deleteRecord(store, type, snapshot) {
-    return this._super(...arguments).then(() => {
+    return super.deleteRecord(...arguments).then(() => {
       snapshot.record.eachRelationship((name, relationship) => {
         if (relationship.kind !== 'hasMany' && relationship.options.dependent !== 'destroy') { return; }
 
@@ -15,7 +15,7 @@ export default IndexedDbAdapter.extend({
         store.query(relationship.type, query).then((results) => results.invoke('destroyRecord'));
       });
     });
-  },
+  }
 
   // ensure we can access `hasMany` relationship data like via an API
   findHasMany(store, snapshot, url, relationship) {
@@ -23,9 +23,9 @@ export default IndexedDbAdapter.extend({
     query[snapshot.modelName] = snapshot.id;
 
     return this.query(store, store.modelFor(relationship.type), query);
-  },
+  }
 
   generateIdForRecord() {
     return v4();
   }
-});
+}

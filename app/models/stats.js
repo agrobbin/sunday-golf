@@ -1,16 +1,22 @@
-import EmberObject from '@ember/object';
 import { computed } from '@ember/object';
 
-export default EmberObject.extend({
-  unsortedHoles: computed('scores.@each.hole', function() {
+export default class Stats {
+  constructor(scores) {
+    this.scores = scores;
+  }
+
+  @computed('scores.@each.hole')
+  get unsortedHoles() {
     return this.scores.mapBy('hole').uniqBy('number');
-  }),
+  }
 
-  sortedHoles: computed('unsortedHoles.@each.number', function() {
+  @computed('unsortedHoles.@each.number')
+  get sortedHoles() {
     return this.unsortedHoles.sortBy('number');
-  }),
+  }
 
-  holes: computed('sortedHoles', 'scores.@each.netToPar', function() {
+  @computed('sortedHoles', 'scores.@each.netToPar')
+  get holes() {
     let netToParRunningTotal = 0;
 
     return this.sortedHoles.map((hole) => {
@@ -24,7 +30,7 @@ export default EmberObject.extend({
 
       return { hole, netToPar: this._formatScore(score), netToParRunningTotal: this._formatScore(netToParRunningTotal) };
     });
-  }),
+  }
 
   _sumScoreForHole(hole, scores) {
     const values = scores.mapBy('netToPar').compact().sort();
@@ -43,7 +49,7 @@ export default EmberObject.extend({
     });
 
     return score;
-  },
+  }
 
   _formatScore(score) {
     if (score === 0) {
@@ -54,4 +60,4 @@ export default EmberObject.extend({
       return `−${Math.abs(score)}`;
     }
   }
-});
+}
