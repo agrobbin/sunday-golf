@@ -16,11 +16,13 @@ module.exports = {
     browser: true
   },
   rules: {
+    'ember/no-jquery': 'error'
   },
   overrides: [
     // node files
     {
       files: [
+        '.ember-cli.js',
         '.eslintrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
